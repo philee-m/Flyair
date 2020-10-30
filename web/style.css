@@ -1,0 +1,646 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    /* background-color: #ffffff; */
+    font-family: "raleway";
+}
+/* body{
+    background: linear-gradient(to right, #ffffff , #d6eee1);
+} */
+
+a {
+    text-decoration: none;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 10%;
+    
+    
+}
+.logo{
+    cursor: pointer;
+    display: inline-flex;
+    justify-content: center;
+    color: teal;
+}
+.logo h2{
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.logo h1{
+    font-family: "Gilroy-Medium";
+}
+.suggestions {
+    /*border: 1px rgba(70, 67, 67, 0.432) solid;*/
+    border-radius: 10px;
+    position: absolute;
+    top: 48px;
+    z-index: 9999;
+    width: 240px;
+    overflow: hidden
+}
+.suggestions > div {
+    padding: 2px;
+    color: black;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: white;
+}
+.suggestions > div:hover {
+    background-color: rgb(177, 174, 174);
+}
+.search-box{
+    border: 1px rgba(70, 67, 67, 0.432) solid;
+    background: #ffffff;
+    height: 35px;
+    border-radius: 40px;
+    padding-left: 5px;
+    /*overflow: hidden*/ 
+}
+.search-box:focus{
+    border-radius: 10px;
+}
+.search-btn{
+    color: #ffffff;
+    float: right;    
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: #0088a9;
+    display: flex;
+    justify-content: center;
+    align-items: center;   
+}
+.search-btn i{
+    background-color: #0088a9;
+}
+#search-txt{
+    border: none;
+    background: none;
+    outline: none;
+    float: left;
+    padding: 0;
+    color: rgb(3, 3, 3);
+    font-size: 14px;
+    line-height: 35px;
+    width: 240px;
+
+}
+/* .nav-links {
+    list-style: none;
+}
+.nav-links li{
+    display: inline-block;
+    padding: 0px 20px;
+} */
+.nav-links {
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    margin-bottom: 0;
+}
+.nav-links li{
+    display: inline-block;
+    padding: 0px 20px;
+}
+
+.nav-links li a {
+    transition: all 0.3s ease 0s;
+}
+
+.nav-links li a:hover{
+    color: #0088a9;
+}
+
+
+button.main{
+    padding: 3px 14px;
+    background-color: rgba(0, 136, 169, 1);
+    color: white;
+    font-weight: 500;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+}
+
+button:hover {
+    background-color: rgb(111, 183, 201);
+}
+
+/* ---------------------- carousel design----------------------- */
+.banner{
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    height: 100vh;
+}
+.carousel-inner .carousel-item{
+    max-height: 400px;
+    /* display: flex;
+    justify-content: space-between;
+    align-items: flex-end; */
+}
+.carousel-caption{
+    width: 300px;
+    height: 300px;
+    float: right;
+    padding-bottom: 100px;
+    border-radius: 10px;
+    background-color: rgba(5, 5, 5, 0.425);
+}
+.carousel-caption p,h3 {
+    margin: 10px;
+}
+.carousel-caption h3{
+    font-size: 20px;
+}
+.carousel-control-prev{
+    background-image: none;
+}
+.carousel-control-next{
+    background-image: none;
+}
+.carousel-indicators .active{
+    background-color: rgb(27, 137, 228);
+} 
+/*----------------------- styling the match------------------------ */
+.content {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+}
+.content .testimony {
+    /* text-align: center; */
+    margin-top: 20px;
+    padding-left: 20px;
+    box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+    min-width: 350px;
+}
+.content .testimony i{
+    font-size: 20px;
+    color: rgb(16, 209, 16);
+    padding-right: 10px;
+}
+.matches{
+    margin: 20px 5px;
+    width: 60%;
+    padding: 10px 5%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 5px rgba(0, 0, 0, 0.19);
+}
+.matches form{
+    margin: 10px 100px;
+}
+.matches input{
+    display: inline-block;
+    width: 200px;
+    margin-bottom: 10px;
+}
+.match{
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px 10px;
+    margin: 5px;
+    /* border: 1px solid black; */
+    box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+    border-radius: 10px;
+}
+.match p,h3{
+    margin: 0;
+}
+.match p{
+    padding: 0;
+}
+.match h3{
+    font-size: 24px;
+}
+.date {
+    width: fit-content;
+}
+p.daymonth{
+    border-bottom: 2px solid black ;
+    line-height: 24px;
+}
+p.daymonth .month {
+    font-size: 30px;
+}
+p.daymonth .day {
+    font-size: 16px;
+}
+p.year {
+    font-size: 30px;
+    line-height: 20px;
+}
+.teamlogos img {
+    width: 50px;
+    height: 70px;
+}
+
+.page-directions{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.page-directions a{
+    margin-left: 20px;
+    padding: 2px;
+}
+
+/* ------------------------- frequently asked questions ------------------------ */
+
+.faq-section h2{
+    text-align: center;
+    font-weight: bold;
+    color: darkgray;
+}
+.faq-section h4{
+    font-weight: bold;
+    color: darkgray;
+}
+/* --------------------------categories styling----------------------- */
+.categories {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 95%;
+    margin: 20px auto;
+    padding: 10px 5%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+}
+.categories h1,.ticket-overview h1{
+    font-size: 2rem;
+    font-weight: 600;
+    color: teal;
+}
+.category{
+    width: 50%;
+}
+.category form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 5px;
+    padding: 5px 10px;
+    border: 1px solid black;
+    border-radius: 10px;
+}
+
+
+.categories p, .ticket-overview p{
+    margin-bottom: 2px;
+}
+
+.category button.adjust{
+    padding: 0;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: none;
+    text-align: center;
+    outline: none;
+    background-color: rgba(147, 231, 231, 0.548);
+
+}
+.category input {
+    width: 30px;
+    border-radius: 30px;
+    text-align: center;
+    outline: none;
+}
+/* p.warning.urgent */
+.categories img, .ticket-overview img {
+    width: 150px;
+    height: 150px;
+}
+.bundle-btn{
+    border: 3px teal solid;
+    background-color: white;
+    color: teal;
+    font-weight: bold;
+    padding: 5px 20px;
+    border-radius: 10px;
+}
+
+.bundle-btn:hover {
+    background-color: teal;
+    color: white;
+}
+.category p{
+    font-size: 14px;
+}
+.category h4{
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.category .buy p{
+    font-size: 12px;
+}
+/* h1+p {margin-top: 0;} */
+.ticket-overview{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+} 
+.ticket-overview .ticket {
+    min-width: 60%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.ticket h6:nth-child(even){
+    border-top: 2px solid teal;
+}
+
+/* -------------------payment information------------------------ */
+.payment-info {
+    width: 50%;
+}
+
+
+/* -----------------------admin dashboard styling--------------------------- */
+
+.sidebar {
+    float: left;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    box-shadow: 0px 0px 19px 5px rgba(0, 0, 0, 0.19);
+    height: 600px;
+    padding: 0 40px 0 0;
+    margin: 0 10px;
+}
+.sidebar-icon {
+    width: 30px;
+    height: 30px;
+}
+.sidebar a{
+    margin-left: 20px;
+    color: black;
+    font-size: 13px;
+    margin-bottom: 2px;
+    padding: 3px;
+    text-decoration: none;
+    text-align: left;
+}
+.sidebar h4{
+    font-weight: 600;
+    font-size: 16px;
+    /* margin-left: -60px; */
+}
+.sidebar a:focus,a:hover {
+    background-color: rgba(155, 182, 192, 0.603);
+    color: blue;
+}
+
+.admin input[type*="t"], .admin input[type="number"], select {
+    border: 1px rgba(0, 0, 0, 0.311) solid ;
+    outline: none;
+    /* background-color: #DCEAF6; */
+    padding: 5px;
+}
+.admin-btn {
+    border: 2px #3CB371 solid;
+    background-color: white;
+    color: #3CB371;
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: 10px;
+}
+.admin-btn:hover {
+    background-color:#3CB371;
+    color: white;
+}
+.admin table{
+    width: 100%;
+    margin-left: 20px;
+    border-collapse: separate;
+    border-spacing: 0.1em;
+}
+/* .admin table thead{
+    color: #3cb372de;
+    background-color: rgb(161, 209, 228);
+} */
+.admin table tbody tr{
+    border: 1px #97c0e4 solid ;
+    outline: none;
+    margin-top: 10px;
+    /* background-color: #DCEAF6; */
+}
+
+/* -------ticketform--------- */
+.admin h2 {
+    font-weight: bold;
+    font-size: 20px;
+    color: #00000070;
+}
+
+.home{
+    width: 100%;
+    position: absolute;
+    top: 30%;
+    left: 40%;
+}
+.home h2 {
+    font-size: 100px;
+    color: teal;
+    font-family: "Great Wishes";
+
+}
+
+#ticket-tab, #team-tab, #tournament-tab, #operator-tab, payment-info{
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}  
+
+.inputs{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.inputs .inputbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 300px;
+    margin: 5px 20px;
+}  
+.inputs .inputbox label {
+    font-size: 14px;
+    margin-bottom: 4px;
+    color: #00000096;
+    font-weight: bold;
+}  
+
+.inputbox input[type="text"]{
+    width: 250px;
+}
+.inputs table td input,.inputs table th {
+    width: 200px;
+}
+
+/* ----------------------------- view ticket Styling---------------------- */
+#view-ticket-tab {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+}
+#view-ticket-tab .filter form{
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    margin-bottom: 10px;
+}
+#view-ticket-tab .filter form input,select{
+    margin-right: 10px;
+}
+
+/* ----------------------------- login form Styling---------------------- */
+.login {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 400px;
+    border: 1px solid rgb(185, 181, 181);
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    padding: 20px;
+    border-radius: 10px;
+    
+}
+.login .logo{
+    margin: auto;
+}
+.login .form-group label {
+    margin: 0px;
+    font-weight: bold;
+}
+.login .form-group label span{
+    color: red;
+    font-size: 24px;
+}
+
+.login .form-group input{
+    margin: 2px 0;
+    width: 300px;
+    height: 30px;
+    outline: none;
+    border: 1px solid gray;
+}
+.login button{
+    margin: auto;
+    color: white;
+    background-color: rgb(18, 179, 85);
+    font-weight: bold;
+    width: 200px;
+    text-align: center;
+    padding: 5px 0;
+    margin: 10px;
+    border: 1px solid rgb(147, 204, 171);
+    
+}
+@media(max-width: 400px){
+    .login{
+        width: 100%;
+        height: auto;
+    }
+}
+/* ------------------------------- footer ------------------------- */
+footer {
+    /* position: absolute;
+    margin-top: 10px;
+    bottom: 0; */
+    width: 100%;
+}
+footer .socialinfo {
+    background-color: teal;
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 10px;
+    min-height: 200px;
+}
+
+footer .socialinfo * {
+    background-color: transparent;
+    color: white;
+}
+
+footer .socialinfo h3,h5{
+    margin: 10px 5px;
+    line-height: 18px;
+    font-size: 1.17em;
+}
+footer .socialinfo .info a{
+    display: block;
+    font-size: 14px;
+    line-height: 24px;
+}
+footer .socialinfo .info a:hover {
+    text-decoration: underline;
+}
+footer .socialinfo .socials a{
+    font-size: 24px;
+    border: 1px rgba(255, 255, 255, 0.178) solid;
+    margin: 10px;
+    padding: 5px 10px;
+    border-radius: 50px;
+}
+
+footer .socialinfo .subscription {
+    color: white;
+}
+footer .socialinfo .subscription form{
+    margin-top: 10px;
+}
+footer .socialinfo .subscription input{
+    min-width: 200px;
+    color: rgb(255, 255, 255);
+    height: 40px;
+    border: 1px #ffffff solid;
+    border-radius: 5px;
+
+}
+
+footer .socialinfo .subscription button{
+    padding: 10px;
+    color: rgb(16, 142, 173);
+    background-color: #ffffff;
+    font-weight: bold;
+    border: none;
+}
+footer .copyright {
+    color: rgb(16, 142, 173);
+    text-align: center;
+    font-weight: 500;
+    padding: 8px;
+}
+footer .copyright p{
+    margin-bottom: 0;
+}
+
+
+
+
