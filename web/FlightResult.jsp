@@ -22,7 +22,7 @@
         <link rel="stylesheet" href="assets/css/lightslider.css">
         <link rel="stylesheet" href="assets/css/styles.css">
         <!-- <link rel="stylesheet" href="style.css"> -->
-        <title>Flight Result</title>
+        <title>Flight Result Page</title>
     </head>
 
     <body>
