@@ -77,13 +77,16 @@
                             <input type="number" step="0.1" name="journeyHrs" value="<%=flight.getJourneyHrs()%>">
                         </div>
                         <div class="inputbox">
-                            <label for="">Action</label>
+                            <label for="">Status</label>
                             <select name="action">
                                 <%
                                     for(FlightBookingStatus flightstatus:flightstatuslist){
+                                        if (flightstatus.equals(flight.getFlightStatus())) {
                                 %>
+                                <option value="<%=flightstatus%>" selected><%=flightstatus%></option>
+                                <%} else{%>
                                 <option value="<%=flightstatus%>"><%=flightstatus%></option>
-                                <%}%>
+                                <%}}%>
                             </select>
                         </div>
                         

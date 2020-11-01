@@ -52,14 +52,14 @@
 
         %>
         <section class="flight-search-results">
-            <%                if (flightlist.isEmpty()) {
+            <%                if (flightlist.isEmpty() || categorylist.isEmpty()) {
 
             %>
             <div id="notfound">
                 <div class="notfound">
                     <h2>Oops! Flight Not Found</h2>
                     <p>Sorry but the flight you are looking for can not be found, you can search another convenient flight or try again sometime later</p>
-                    <a href="Homapage.jsp" class="btn btn-primary">Search Again</a>
+                    <a href="Homepage.jsp" class="btn btn-primary">Search Again</a>
                 </div>
             </div>
 
@@ -100,7 +100,7 @@
                                 <h3>$<%=categorylist.get(i).getCategoryPrice()%></h3>
                             </div>
                             <a href="Passenger.jsp?id=<%=categorylist.get(i).getId()%>" class="btn btn-success">select</a>
-                        </div>
+                        </div>                        
                     </div>
 
                 </div>
