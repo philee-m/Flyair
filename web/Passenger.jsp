@@ -131,12 +131,7 @@
                 </div>
                 <div>
                     <div>
-                        <ul>
-                            <li><a href="">Terms</a></li>
-                            <li><a href="">Privacy policy and cookie policy Us</a></li>
-                            <li><a href="">Contact us</a></li>
-                            <li><a href="">Featured Flights</a></li>
-                        </ul>
+                     
                     </div>
                 </div>
 
