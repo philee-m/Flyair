@@ -4,6 +4,7 @@
     Author     : Philip
 --%>
 
+<%@page import="Domain.FlightBookingStatus"%>
 <%@page import="Controller.DashboardService"%>
 <%@page import="Dao.CategoryDao"%>
 <%@page import="java.util.List"%>
@@ -32,19 +33,12 @@
             List<FlightCategory> categorylist = CategoryDao.getInstance().SearchByFlightId(flightid);
             session.setAttribute("flightid", flightid);
             DashboardService ds = new DashboardService();
-            request.setAttribute("actionli", ds.getFlightstatuslist());
-            System.out.println(ds.getFlightstatuslist()[0]);
-            System.out.println(ds.getFlightstatuslist()[1]);
-            System.out.println(ds.getFlightstatuslist()[2]);
-            System.out.println(ds.getFlightstatuslist()[3]);
-            
-            
-            
+            FlightBookingStatus [] flightstatuslist = ds.getFlightstatuslist();
         %>
         <div class="admin">
             <div class="admin-tab" id="ticket-tab" style="display: block; margin: auto">
                 <h2 style="text-align: center">Update Flight</h2>
-                <form action="FlightUpdateControl" method="POST">
+                <form action="UpdateControl" method="POST">
                     <div class="inputs">
                         <div class="inputbox">
                             <label for="">Airline Name</label>
@@ -85,9 +79,11 @@
                         <div class="inputbox">
                             <label for="">Action</label>
                             <select name="action">
-                                <c:forEach items="${actionli}" var="actione">
-                                    <option value="${actione}">${actione}</option>
-                                </c:forEach>
+                                <%
+                                    for(FlightBookingStatus flightstatus:flightstatuslist){
+                                %>
+                                <option value="<%=flightstatus%>"><%=flightstatus%></option>
+                                <%}%>
                             </select>
                         </div>
                         
@@ -121,6 +117,7 @@
                     <input type="number" name="catrows" id="totalrows" hidden>
                     <button type="button" class="admin-btn" onclick="add()">+</button>
                     <button type="button" class="admin-btn" onclick="remove()">-</button><br>
+                    <input type="text" name="actione" hidden value="updateflight">
                     <button type="submit" class="admin-btn">submit</button>
                     
                     <label for="">press +, - button to add or remove category respectively</label>

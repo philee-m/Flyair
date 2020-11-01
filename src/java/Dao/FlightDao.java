@@ -21,7 +21,7 @@ public class FlightDao {
       SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
     public static FlightDao flightDao = null;
-    public static FlightDao getInstance(){
+    public static synchronized FlightDao getInstance(){
         if(flightDao==null){
             flightDao=new FlightDao();
         }

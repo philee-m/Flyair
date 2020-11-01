@@ -407,6 +407,12 @@ p.year {
     color: blue;
 }
 
+.display {
+    display:block;
+}
+.hide {
+    display:none
+}
 .admin input[type*="t"], .admin input[type="number"], select {
     border: 1px rgba(0, 0, 0, 0.311) solid ;
     outline: none;
@@ -497,7 +503,7 @@ p.year {
 }
 
 /* ----------------------------- view ticket Styling---------------------- */
-#view-ticket-tab {
+#view-ticket-tab, #view-operator-tab {
     display: flex;
     flex-direction: column;
     align-items: center;

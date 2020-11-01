@@ -60,7 +60,8 @@ public class OperatorControl extends HttpServlet {
         operator.setEmail(request.getParameter("email"));
         operator.setPhonenumber(request.getParameter("phonenumber"));
         operator.setGender(Gender.valueOf(request.getParameter("gender")));
-        operator.setDistrict(request.getParameter("district"));
+        operator.setCity(request.getParameter("city"));
+        operator.setAddress(request.getParameter("address"));
         
         Date date = new Date();
         Timestamp ts = new Timestamp(date.getTime());
@@ -74,6 +75,7 @@ public class OperatorControl extends HttpServlet {
         
 
         operatorDao.createOperator(operator, account);
+        response.sendRedirect("Dashboard.jsp");
 
     }
 

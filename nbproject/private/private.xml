@@ -3,17 +3,18 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Dao/AccountDao.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/IdentificationType.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/FlightCategory.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Dao/CategoryDao.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Dao/GenericDao.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Dao/OperatorDao.java</file>
-            <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Controller/FlightUpdateControl.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/Login.jsp</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/Error.jsp</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/Contact.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/hibernate.cfg.xml</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/Operator.java</file>
+            <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/UpdateOperator.jsp</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/Flight.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/index.html</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/AccountStatus.java</file>
@@ -30,11 +31,14 @@
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Controller/OperatorControl.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/Category.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/Person.java</file>
+            <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/logout.jsp</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Dao/HibernateUtil.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/UpdateTicket.jsp</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/assets/css/styles.css</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/Post.java</file>
+            <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Controller/UpdateControl.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/web/Passenger.jsp</file>
+            <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Controller/LoginControl.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Domain/Passenger.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Dao/FlightDao.java</file>
             <file>file:/C:/Users/Philip/Documents/NetBeansProjects/Flyair/src/java/Controller/TicketControl.java</file>

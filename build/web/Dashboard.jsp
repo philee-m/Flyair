@@ -4,6 +4,7 @@
     Author     : Philip
 --%>
 
+<%@page import="Domain.Operator"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="Dao.GenericDao"%>
@@ -24,31 +25,40 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-
-        <%
+       
+        <%  
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Login.jsp");
+            }
             SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
             SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm:ss");
             List<Flight> flightlist = (List<Flight>) GenericDao.getInstance().findAll(new Flight());
+            List<Operator> operatorlist = (List<Operator>) GenericDao.getInstance().findAll(new Operator());
             DashboardService ds = new DashboardService();
+            String username = (String) session.getAttribute("user");
+            String post = (String) session.getAttribute("operatorpost");
+            System.out.println("the post value is :"+ post);
             request.setAttribute("genderlist", ds.getGenderList());
+            request.setAttribute("statuslist", ds.getAccountstatuslist());
             request.setAttribute("postlist", ds.getPostlist());
             request.setAttribute("categorylist", ds.getCategorylist());
             session.setAttribute("action", "create");
-            
+            String display_hide = (post.equalsIgnoreCase("ADMIN")) ? "block" : "none";;
         %>
         <div class="sidebar">
             <h2 style="font-size: 20px; font-weight: bold;text-align: center;">Dashboard</h2>
             <div class="separator"></div>
-            <a href="#" onclick="openMenu(event, 'ticket-tab')" class="sidebar-a"><img src="studio.svg" class="sidebar-icon" alt=""> Add Match</a>
-            <a href="#" onclick="openMenu(event, 'view-ticket-tab')"><img src="studio.svg" class="sidebar-icon" alt="">Update Match</a>
-            <a href="#"><img src="studio.svg" class="sidebar-icon" alt="">Ticket Sales</a>
-            <a href="#" onclick="openMenu(event, 'operator-tab')"><img src="studio.svg" class="sidebar-icon" alt="">Add Operator</a>
-            <a href="#"><img src="studio.svg" class="sidebar-icon" alt="">Update operator</a>
+            <a href="#" onclick="openMenu(event, 'ticket-tab')" class="sidebar-a"><img src="add.svg" class="sidebar-icon" alt=""> Add Match</a>
+            <a href="#" onclick="openMenu(event, 'view-ticket-tab')"><img src="update.svg" class="sidebar-icon" alt="">Update Match</a>
+
+            <a href="#"  style="display: <%=display_hide%>" onclick="openMenu(event, 'operator-tab')"><img src="add.svg" class="sidebar-icon" alt="">Add Operator</a>
+            <a href="#" style="display: <%=display_hide%>"onclick="openMenu(event, 'view-operator-tab')"><img src="update.svg" class="sidebar-icon" alt="">Update operator</a>
+            <a href="logout.jsp"><img src="logout.svg" class="sidebar-icon" alt="">logout</a>
 
         </div>
         <div class="admin">
             <div class="home admin-tab">
-                
+
             </div>
             <div class="admin-tab" id="ticket-tab" style="display: none;">
                 <h2>Add Flight</h2>
@@ -58,6 +68,7 @@
                             <label for="">Airline Name</label>
                             <input type="text" name="airline">
                         </div>
+
                         <div class="inputbox">
                             <label for="">takeoff place</label>
                             <input type="text" name="takeoffPlace">
@@ -114,23 +125,14 @@
                 </form>
             </div>
 
-            
+
 
             <!-- view tickets,ticket table ,search tickets -->
 
             <div class="admin-tab" id="view-ticket-tab" style="display: none;">
                 <h2>View Match</h2>
                 <div class="filter">
-                    <form action="" method="get">
-                        <select name="searchfield">
-                            <option value="select">Airline</option>
-                            <option value="team">depart from</option>
-                            <option value="tournament">depart to</option>
-                        </select>
-                        <input type="text" name="search-txt">
-                        <input type="date" name="todate">
-                        <button type="submit" class="admin-btn">search</button>
-                    </form>
+
                 </div>
                 <table>
                     <thead>
@@ -198,8 +200,12 @@
                             <input type="text" name="phonenumber">
                         </div>
                         <div class="inputbox">
-                            <label for="">District <span>*</span></label>
-                            <input type="text" name="district">
+                            <label for="">City <span>*</span></label>
+                            <input type="text" name="city">
+                        </div>
+                        <div class="inputbox">
+                            <label for="">Address <span>*</span></label>
+                            <input type="text" name="address">
                         </div>
                         <div class="inputbox">
                         </div>
@@ -221,6 +227,14 @@
                             </select>
                         </div>
                         <div class="inputbox">
+                            <label for="">Account Status <span>*</span></label>
+                            <select name="post">
+                                <c:forEach items="${statuslist}" var="status">
+                                    <option value="${status}">${status}</option>
+                                </c:forEach>
+                            </select>
+                        </div>
+                        <div class="inputbox">
                             <label for="">password <span>*</span></label>
                             <input type="password" name="password">
                         </div>
@@ -229,8 +243,46 @@
                     <button type="submit" class="admin-btn">submit</button>
                 </form>
             </div>
+            <div class="admin-tab" id="view-operator-tab" style="display: none;">
+                <h2>View Match</h2>
+                <div class="filter">
 
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>First Name</th>
+                            <th>Last Name</th>
+                            <th>City</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Date Created 1</th>
+                            <th>Date Created 2</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <%
+                            for (Operator operatorInstance : operatorlist) {
+                        %>
+                        <tr>
+                            <td><%=operatorInstance.getFirstname()%></td>
+                            <td><%=operatorInstance.getLastname()%></td>
+                            <td><%=operatorInstance.getCity()%></td>
+                            <td><%=operatorInstance.getEmail()%></td>
+                            <td><%=operatorInstance.getPhonenumber()%></td>
+                            <td><%=dateformat.format(operatorInstance.getCreatedon())%></td>
+                            <td><%=operatorInstance.getCreatedon()%></td>
+                            <td>
+                                <a href="UpdateOperator.jsp?operatorid=<%=operatorInstance.getId()%>"><button>Edit</button></a>
+                            </td>
+                        </tr>
+                        <%}%>
+                    </tbody>
+                </table>
+            </div>
         </div>
+
         <script>
             function openMenu(evt, MenuName) {
                 var i, x, tablinks;

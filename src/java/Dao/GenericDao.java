@@ -17,7 +17,7 @@ public class GenericDao {
     SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
     public static GenericDao genericDao = null;
-    public static GenericDao getInstance(){
+    public static synchronized GenericDao getInstance(){
         if(genericDao==null){
             genericDao=new GenericDao();
         }

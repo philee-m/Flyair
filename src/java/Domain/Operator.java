@@ -22,15 +22,15 @@ import javax.persistence.SequenceGenerator;
 public class Operator extends Person{
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE, generator="operatorseq")
-    private int id;
+    private Long id;
     @Column(nullable = false)
     private Date createdon;
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

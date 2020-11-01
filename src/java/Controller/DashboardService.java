@@ -5,6 +5,7 @@
  */
 package Controller;
 
+import Domain.AccountStatus;
 import Domain.Category;
 import Domain.FlightBookingStatus;
 import Domain.Gender;
@@ -20,6 +21,7 @@ public class DashboardService {
   private Post [] postlist = Post.values();
   private Category [] categorylist = Category.values();
   private FlightBookingStatus [] flightstatuslist = FlightBookingStatus.values();
+  private AccountStatus [] accountstatuslist = AccountStatus.values();
 
     public Gender[] getGenderList() {
         return genderList;
@@ -51,6 +53,14 @@ public class DashboardService {
 
     public void setCategorylist(Category[] categorylist) {
         this.categorylist = categorylist;
+    }
+
+    public AccountStatus[] getAccountstatuslist() {
+        return accountstatuslist;
+    }
+
+    public void setAccountstatuslist(AccountStatus[] accountstatuslist) {
+        this.accountstatuslist = accountstatuslist;
     }
     
     

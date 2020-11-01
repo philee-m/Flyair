@@ -3,6 +3,7 @@ package org.apache.jsp;
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
+import Domain.Operator;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import Dao.GenericDao;
@@ -66,6 +67,7 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("\n");
       out.write("\n");
       out.write("\n");
+      out.write("\n");
       out.write("<!DOCTYPE html>\n");
       out.write("<html>\n");
       out.write("    <head>\n");
@@ -78,33 +80,46 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("        <link rel=\"stylesheet\" href=\"style.css\">\n");
       out.write("    </head>\n");
       out.write("    <body>\n");
-      out.write("\n");
+      out.write("       \n");
       out.write("        ");
-
+  
+            if (session.getAttribute("user") == null) {
+                response.sendRedirect("Login.jsp");
+            }
             SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
             SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm:ss");
             List<Flight> flightlist = (List<Flight>) GenericDao.getInstance().findAll(new Flight());
+            List<Operator> operatorlist = (List<Operator>) GenericDao.getInstance().findAll(new Operator());
             DashboardService ds = new DashboardService();
+            String username = (String) session.getAttribute("user");
+            String post = (String) session.getAttribute("operatorpost");
+            System.out.println("the post value is :"+ post);
             request.setAttribute("genderlist", ds.getGenderList());
+            request.setAttribute("statuslist", ds.getAccountstatuslist());
             request.setAttribute("postlist", ds.getPostlist());
             request.setAttribute("categorylist", ds.getCategorylist());
             session.setAttribute("action", "create");
-            
+            String display_hide = (post.equalsIgnoreCase("ADMIN")) ? "block" : "none";;
         
       out.write("\n");
       out.write("        <div class=\"sidebar\">\n");
       out.write("            <h2 style=\"font-size: 20px; font-weight: bold;text-align: center;\">Dashboard</h2>\n");
       out.write("            <div class=\"separator\"></div>\n");
-      out.write("            <a href=\"#\" onclick=\"openMenu(event, 'ticket-tab')\" class=\"sidebar-a\"><img src=\"studio.svg\" class=\"sidebar-icon\" alt=\"\"> Add Match</a>\n");
-      out.write("            <a href=\"#\" onclick=\"openMenu(event, 'view-ticket-tab')\"><img src=\"studio.svg\" class=\"sidebar-icon\" alt=\"\">Update Match</a>\n");
-      out.write("            <a href=\"#\"><img src=\"studio.svg\" class=\"sidebar-icon\" alt=\"\">Ticket Sales</a>\n");
-      out.write("            <a href=\"#\" onclick=\"openMenu(event, 'operator-tab')\"><img src=\"studio.svg\" class=\"sidebar-icon\" alt=\"\">Add Operator</a>\n");
-      out.write("            <a href=\"#\"><img src=\"studio.svg\" class=\"sidebar-icon\" alt=\"\">Update operator</a>\n");
+      out.write("            <a href=\"#\" onclick=\"openMenu(event, 'ticket-tab')\" class=\"sidebar-a\"><img src=\"add.svg\" class=\"sidebar-icon\" alt=\"\"> Add Match</a>\n");
+      out.write("            <a href=\"#\" onclick=\"openMenu(event, 'view-ticket-tab')\"><img src=\"update.svg\" class=\"sidebar-icon\" alt=\"\">Update Match</a>\n");
+      out.write("\n");
+      out.write("            <a href=\"#\"  style=\"display: ");
+      out.print(display_hide);
+      out.write("\" onclick=\"openMenu(event, 'operator-tab')\"><img src=\"add.svg\" class=\"sidebar-icon\" alt=\"\">Add Operator</a>\n");
+      out.write("            <a href=\"#\" style=\"display: ");
+      out.print(display_hide);
+      out.write("\"onclick=\"openMenu(event, 'view-operator-tab')\"><img src=\"update.svg\" class=\"sidebar-icon\" alt=\"\">Update operator</a>\n");
+      out.write("            <a href=\"logout.jsp\"><img src=\"logout.svg\" class=\"sidebar-icon\" alt=\"\">logout</a>\n");
       out.write("\n");
       out.write("        </div>\n");
       out.write("        <div class=\"admin\">\n");
       out.write("            <div class=\"home admin-tab\">\n");
-      out.write("                \n");
+      out.write("\n");
       out.write("            </div>\n");
       out.write("            <div class=\"admin-tab\" id=\"ticket-tab\" style=\"display: none;\">\n");
       out.write("                <h2>Add Flight</h2>\n");
@@ -114,6 +129,7 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <label for=\"\">Airline Name</label>\n");
       out.write("                            <input type=\"text\" name=\"airline\">\n");
       out.write("                        </div>\n");
+      out.write("\n");
       out.write("                        <div class=\"inputbox\">\n");
       out.write("                            <label for=\"\">takeoff place</label>\n");
       out.write("                            <input type=\"text\" name=\"takeoffPlace\">\n");
@@ -170,23 +186,14 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                </form>\n");
       out.write("            </div>\n");
       out.write("\n");
-      out.write("            \n");
+      out.write("\n");
       out.write("\n");
       out.write("            <!-- view tickets,ticket table ,search tickets -->\n");
       out.write("\n");
       out.write("            <div class=\"admin-tab\" id=\"view-ticket-tab\" style=\"display: none;\">\n");
       out.write("                <h2>View Match</h2>\n");
       out.write("                <div class=\"filter\">\n");
-      out.write("                    <form action=\"\" method=\"get\">\n");
-      out.write("                        <select name=\"searchfield\">\n");
-      out.write("                            <option value=\"select\">Airline</option>\n");
-      out.write("                            <option value=\"team\">depart from</option>\n");
-      out.write("                            <option value=\"tournament\">depart to</option>\n");
-      out.write("                        </select>\n");
-      out.write("                        <input type=\"text\" name=\"search-txt\">\n");
-      out.write("                        <input type=\"date\" name=\"todate\">\n");
-      out.write("                        <button type=\"submit\" class=\"admin-btn\">search</button>\n");
-      out.write("                    </form>\n");
+      out.write("\n");
       out.write("                </div>\n");
       out.write("                <table>\n");
       out.write("                    <thead>\n");
@@ -275,8 +282,12 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            <input type=\"text\" name=\"phonenumber\">\n");
       out.write("                        </div>\n");
       out.write("                        <div class=\"inputbox\">\n");
-      out.write("                            <label for=\"\">District <span>*</span></label>\n");
-      out.write("                            <input type=\"text\" name=\"district\">\n");
+      out.write("                            <label for=\"\">City <span>*</span></label>\n");
+      out.write("                            <input type=\"text\" name=\"city\">\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"inputbox\">\n");
+      out.write("                            <label for=\"\">Address <span>*</span></label>\n");
+      out.write("                            <input type=\"text\" name=\"address\">\n");
       out.write("                        </div>\n");
       out.write("                        <div class=\"inputbox\">\n");
       out.write("                        </div>\n");
@@ -299,6 +310,15 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                            </select>\n");
       out.write("                        </div>\n");
       out.write("                        <div class=\"inputbox\">\n");
+      out.write("                            <label for=\"\">Account Status <span>*</span></label>\n");
+      out.write("                            <select name=\"post\">\n");
+      out.write("                                ");
+      if (_jspx_meth_c_forEach_2(_jspx_page_context))
+        return;
+      out.write("\n");
+      out.write("                            </select>\n");
+      out.write("                        </div>\n");
+      out.write("                        <div class=\"inputbox\">\n");
       out.write("                            <label for=\"\">password <span>*</span></label>\n");
       out.write("                            <input type=\"password\" name=\"password\">\n");
       out.write("                        </div>\n");
@@ -307,8 +327,66 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
       out.write("                    <button type=\"submit\" class=\"admin-btn\">submit</button>\n");
       out.write("                </form>\n");
       out.write("            </div>\n");
+      out.write("            <div class=\"admin-tab\" id=\"view-operator-tab\" style=\"display: none;\">\n");
+      out.write("                <h2>View Match</h2>\n");
+      out.write("                <div class=\"filter\">\n");
       out.write("\n");
+      out.write("                </div>\n");
+      out.write("                <table>\n");
+      out.write("                    <thead>\n");
+      out.write("                        <tr>\n");
+      out.write("                            <th>First Name</th>\n");
+      out.write("                            <th>Last Name</th>\n");
+      out.write("                            <th>City</th>\n");
+      out.write("                            <th>Email</th>\n");
+      out.write("                            <th>Phone Number</th>\n");
+      out.write("                            <th>Date Created 1</th>\n");
+      out.write("                            <th>Date Created 2</th>\n");
+      out.write("                            <th>Action</th>\n");
+      out.write("                        </tr>\n");
+      out.write("                    </thead>\n");
+      out.write("                    <tbody>\n");
+      out.write("                        ");
+
+                            for (Operator operatorInstance : operatorlist) {
+                        
+      out.write("\n");
+      out.write("                        <tr>\n");
+      out.write("                            <td>");
+      out.print(operatorInstance.getFirstname());
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print(operatorInstance.getLastname());
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print(operatorInstance.getCity());
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print(operatorInstance.getEmail());
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print(operatorInstance.getPhonenumber());
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print(dateformat.format(operatorInstance.getCreatedon()));
+      out.write("</td>\n");
+      out.write("                            <td>");
+      out.print(operatorInstance.getCreatedon());
+      out.write("</td>\n");
+      out.write("                            <td>\n");
+      out.write("                                <a href=\"UpdateOperator.jsp?operatorid=");
+      out.print(operatorInstance.getId());
+      out.write("\"><button>Edit</button></a>\n");
+      out.write("                            </td>\n");
+      out.write("                        </tr>\n");
+      out.write("                        ");
+}
+      out.write("\n");
+      out.write("                    </tbody>\n");
+      out.write("                </table>\n");
+      out.write("            </div>\n");
       out.write("        </div>\n");
+      out.write("\n");
       out.write("        <script>\n");
       out.write("            function openMenu(evt, MenuName) {\n");
       out.write("                var i, x, tablinks;\n");
@@ -451,6 +529,48 @@ public final class Dashboard_jsp extends org.apache.jasper.runtime.HttpJspBase
     } finally {
       _jspx_th_c_forEach_1.doFinally();
       _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_1);
+    }
+    return false;
+  }
+
+  private boolean _jspx_meth_c_forEach_2(PageContext _jspx_page_context)
+          throws Throwable {
+    PageContext pageContext = _jspx_page_context;
+    JspWriter out = _jspx_page_context.getOut();
+    //  c:forEach
+    org.apache.taglibs.standard.tag.rt.core.ForEachTag _jspx_th_c_forEach_2 = (org.apache.taglibs.standard.tag.rt.core.ForEachTag) _jspx_tagPool_c_forEach_var_items.get(org.apache.taglibs.standard.tag.rt.core.ForEachTag.class);
+    _jspx_th_c_forEach_2.setPageContext(_jspx_page_context);
+    _jspx_th_c_forEach_2.setParent(null);
+    _jspx_th_c_forEach_2.setItems((java.lang.Object) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${statuslist}", java.lang.Object.class, (PageContext)_jspx_page_context, null));
+    _jspx_th_c_forEach_2.setVar("status");
+    int[] _jspx_push_body_count_c_forEach_2 = new int[] { 0 };
+    try {
+      int _jspx_eval_c_forEach_2 = _jspx_th_c_forEach_2.doStartTag();
+      if (_jspx_eval_c_forEach_2 != javax.servlet.jsp.tagext.Tag.SKIP_BODY) {
+        do {
+          out.write("\n");
+          out.write("                                    <option value=\"");
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${status}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write('"');
+          out.write('>');
+          out.write((java.lang.String) org.apache.jasper.runtime.PageContextImpl.evaluateExpression("${status}", java.lang.String.class, (PageContext)_jspx_page_context, null));
+          out.write("</option>\n");
+          out.write("                                ");
+          int evalDoAfterBody = _jspx_th_c_forEach_2.doAfterBody();
+          if (evalDoAfterBody != javax.servlet.jsp.tagext.BodyTag.EVAL_BODY_AGAIN)
+            break;
+        } while (true);
+      }
+      if (_jspx_th_c_forEach_2.doEndTag() == javax.servlet.jsp.tagext.Tag.SKIP_PAGE) {
+        return true;
+      }
+    } catch (Throwable _jspx_exception) {
+      while (_jspx_push_body_count_c_forEach_2[0]-- > 0)
+        out = _jspx_page_context.popBody();
+      _jspx_th_c_forEach_2.doCatch(_jspx_exception);
+    } finally {
+      _jspx_th_c_forEach_2.doFinally();
+      _jspx_tagPool_c_forEach_var_items.reuse(_jspx_th_c_forEach_2);
     }
     return false;
   }

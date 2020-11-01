@@ -18,12 +18,12 @@ import org.hibernate.SessionFactory;
 public class OperatorDao {
     SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
-    public static GenericDao genericDao = null;
-    public static GenericDao getInstance(){
-        if(genericDao==null){
-            genericDao=new GenericDao();
+    public static OperatorDao operatorDao = null;
+    public static synchronized OperatorDao getInstance(){
+        if(operatorDao==null){
+            operatorDao=new OperatorDao();
         }
-        return genericDao;
+        return operatorDao;
     }
     
     public String createOperator(Operator o, Account a ){
@@ -31,6 +31,15 @@ public class OperatorDao {
         session.beginTransaction();
         session.save(o);
         session.save(a);
+        session.getTransaction().commit();
+        session.close();
+        return "success";
+    }
+    public String updateOperator(Operator o, Account a ){
+        session = sf.openSession();
+        session.beginTransaction();
+        session.update(o);
+        session.update(a);
         session.getTransaction().commit();
         session.close();
         return "success";
