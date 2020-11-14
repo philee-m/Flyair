@@ -13,7 +13,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>JSP Page for flightresult</title>
         <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:300,400,600">
         <link href="https://fonts.googleapis.com/css2?family=Nova+Round&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="assets/fonts/font-awesome.min.css">
