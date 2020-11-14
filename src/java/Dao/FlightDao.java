@@ -20,13 +20,7 @@ import org.hibernate.SessionFactory;
 public class FlightDao {
       SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
-    public static FlightDao flightDao = null;
-    public static synchronized FlightDao getInstance(){
-        if(flightDao==null){
-            flightDao=new FlightDao();
-        }
-        return flightDao;
-    }
+    
     public List<Flight> getFlight(int a,int b) {
         session = sf.openSession();
         String sql = "FROM Flight";

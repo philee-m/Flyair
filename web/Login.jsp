@@ -30,6 +30,7 @@
                     <label for="">password</label><br>
                     <input type="password" name="password" class="form-control" required>
                 </div>
+                <input type="text" name="logger" value="operator" hidden> 
                 <button type="submit">sign in</button>
             </div>
         </form>

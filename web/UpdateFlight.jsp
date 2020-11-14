@@ -29,8 +29,9 @@
         <%
             Long flightid = Long.parseLong(request.getParameter("flightid"));
             GenericDao generic = new GenericDao();
+            CategoryDao categoryDao = new CategoryDao();
             Flight flight = (Flight) generic.findBYId(new Flight(), flightid);
-            List<FlightCategory> categorylist = CategoryDao.getInstance().SearchByFlightId(flightid);
+            List<FlightCategory> categorylist = categoryDao.SearchByFlightId(flightid);
             session.setAttribute("flightid", flightid);
             DashboardService ds = new DashboardService();
             FlightBookingStatus [] flightstatuslist = ds.getFlightstatuslist();
@@ -38,7 +39,7 @@
         <div class="admin">
             <div class="admin-tab" id="ticket-tab" style="display: block; margin: auto">
                 <h2 style="text-align: center">Update Flight</h2>
-                <form action="UpdateControl" method="POST">
+                <form action="FlightControl" method="POST">
                     <div class="inputs">
                         <div class="inputbox">
                             <label for="">Airline Name</label>
@@ -73,12 +74,8 @@
                             <input type="number" step="0.1" name="journeyHrs" value="<%=flight.getJourneyHrs()%>">
                         </div>
                         <div class="inputbox">
-                            <label for="">Journey Hours</label>
-                            <input type="number" step="0.1" name="journeyHrs" value="<%=flight.getJourneyHrs()%>">
-                        </div>
-                        <div class="inputbox">
                             <label for="">Status</label>
-                            <select name="action">
+                            <select name="status">
                                 <%
                                     for(FlightBookingStatus flightstatus:flightstatuslist){
                                         if (flightstatus.equals(flight.getFlightStatus())) {
@@ -117,10 +114,10 @@
                         </table>
                     </div>
                     <input id='hidden-total-rows' type='hidden' value='<%=categorylist.size()%>' />
+                    <input type="text" name="action" value="updateflight" hidden>
                     <input type="number" name="catrows" id="totalrows" hidden>
                     <button type="button" class="admin-btn" onclick="add()">+</button>
                     <button type="button" class="admin-btn" onclick="remove()">-</button><br>
-                    <input type="text" name="actione" hidden value="updateflight">
                     <button type="submit" class="admin-btn">submit</button>
                     
                     <label for="">press +, - button to add or remove category respectively</label>

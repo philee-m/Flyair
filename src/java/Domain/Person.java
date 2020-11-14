@@ -5,10 +5,13 @@
  */
 package Domain;
 
+import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
 import javax.persistence.MappedSuperclass;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  *
@@ -26,16 +29,17 @@ public class Person {
     @Enumerated(EnumType.STRING)
     private Gender gender;
     
-    @Column(nullable = false)
-    private String email;
+    @Temporal(TemporalType.DATE)
+    private Date dateOfBirth;
     
-    private String phonenumber;
+    @Enumerated(EnumType.STRING)
+    private IdentificationType identificationType;
     
-    @Column(nullable = false)
-    private String city;
+    private Long idNumber;
     
-    @Column(nullable = false)
-    private String address;
+    private String nationality;
+    
+    private Address address;
 
     public String getFirstname() {
         return firstname;
@@ -53,22 +57,6 @@ public class Person {
         this.lastname = lastname;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhonenumber() {
-        return phonenumber;
-    }
-
-    public void setPhonenumber(String phonenumber) {
-        this.phonenumber = phonenumber;
-    }
-
     public Gender getGender() {
         return gender;
     }
@@ -77,23 +65,47 @@ public class Person {
         this.gender = gender;
     }
 
-    public String getCity() {
-        return city;
+    public Date getDateOfBirth() {
+        return dateOfBirth;
     }
 
-    public void setCity(String city) {
-        this.city = city;
+    public void setDateOfBirth(Date dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
-    public String getAddress() {
+    public IdentificationType getIdentificationType() {
+        return identificationType;
+    }
+
+    public void setIdentificationType(IdentificationType identificationType) {
+        this.identificationType = identificationType;
+    }
+
+    
+
+    public Long getIdNumber() {
+        return idNumber;
+    }
+
+    public void setIdNumber(Long idNumber) {
+        this.idNumber = idNumber;
+    }
+
+    public String getNationality() {
+        return nationality;
+    }
+
+    public void setNationality(String nationality) {
+        this.nationality = nationality;
+    }
+
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 
-    
-    
     
 }

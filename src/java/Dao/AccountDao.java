@@ -5,7 +5,8 @@
  */
 package Dao;
 
-import Domain.Account;
+import Domain.ClientAccount;
+import Domain.OperatorAccount;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -17,19 +18,22 @@ import org.hibernate.SessionFactory;
 public class AccountDao {
     SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
-    public static AccountDao accountDao = null;
-    public static synchronized AccountDao getInstance(){
-        if(accountDao==null){
-            accountDao=new AccountDao();
-        }
-        return accountDao;
-    }
-    public Account SearchByOperatorId(Long a){
+    
+    public OperatorAccount SearchByOperatorId(Long a){
         session=sf.openSession();
-        String hql="FROM Account WHERE operator_id = '"+a+"'";
+        String hql="FROM OperatorAccount WHERE operator_id = '"+a+"'";
         Query query=session.createQuery(hql);
-        Account account =  (Account) query.uniqueResult();
+        OperatorAccount operatorAccount = (OperatorAccount) query.uniqueResult();
         session.close();
-        return account;
+        return operatorAccount;
+    }
+    
+    public ClientAccount SearchByPassengerId(Long a){
+        session=sf.openSession();
+        String hql="FROM ClientAccount WHERE operator_id = '"+a+"'";
+        Query query=session.createQuery(hql);
+        ClientAccount clientAccount =  (ClientAccount) query.uniqueResult();
+        session.close();
+        return clientAccount;
     }
 }

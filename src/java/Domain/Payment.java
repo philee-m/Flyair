@@ -77,4 +77,11 @@ public class Payment {
         this.securityCode = securityCode;
     }
     
+    public static Payment payment;
+    public static synchronized Payment getInstance(){
+        if(payment==null){
+            payment=new Payment();
+        }
+        return payment;
+    }
 }

@@ -25,34 +25,36 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-       
-        <%  
+
+        <%
+            String display_hide = null;
             if (session.getAttribute("user") == null) {
                 response.sendRedirect("Login.jsp");
+            } else {
+                String username = (String) session.getAttribute("user");
+                String post = (String) session.getAttribute("operatorpost");
+                display_hide = (post.equalsIgnoreCase("ADMIN")) ? "block" : "none";
             }
+            GenericDao genericDao = new GenericDao();
             SimpleDateFormat dateformat = new SimpleDateFormat("dd-MM-yyyy");
             SimpleDateFormat timeformat = new SimpleDateFormat("HH:mm:ss");
-            List<Flight> flightlist = (List<Flight>) GenericDao.getInstance().findAll(new Flight());
-            List<Operator> operatorlist = (List<Operator>) GenericDao.getInstance().findAll(new Operator());
+            List<Flight> flightlist = (List<Flight>) genericDao.findAll(new Flight());
+            List<Operator> operatorlist = (List<Operator>) genericDao.findAll(new Operator());
             DashboardService ds = new DashboardService();
-            String username = (String) session.getAttribute("user");
-            String post = (String) session.getAttribute("operatorpost");
-            System.out.println("the post value is :"+ post);
             request.setAttribute("genderlist", ds.getGenderList());
             request.setAttribute("statuslist", ds.getAccountstatuslist());
             request.setAttribute("postlist", ds.getPostlist());
             request.setAttribute("categorylist", ds.getCategorylist());
             session.setAttribute("action", "create");
-            String display_hide = (post.equalsIgnoreCase("ADMIN")) ? "block" : "none";;
+
         %>
         <div class="sidebar">
             <h2 style="font-size: 20px; font-weight: bold;text-align: center;">Dashboard</h2>
             <div class="separator"></div>
-            <a href="#" onclick="openMenu(event, 'ticket-tab')" class="sidebar-a"><img src="add.svg" class="sidebar-icon" alt=""> Add Match</a>
-            <a href="#" onclick="openMenu(event, 'view-ticket-tab')"><img src="update.svg" class="sidebar-icon" alt="">Update Match</a>
-
-            <a href="#"  style="display: <%=display_hide%>" onclick="openMenu(event, 'operator-tab')"><img src="add.svg" class="sidebar-icon" alt="">Add Operator</a>
-            <a href="#" style="display: <%=display_hide%>"onclick="openMenu(event, 'view-operator-tab')"><img src="update.svg" class="sidebar-icon" alt="">Update operator</a>
+            <a href="#" onclick="openMenu(event, 'ticket-tab')" class="sidebar-a"><img src="add.svg" class="sidebar-icon" alt=""> Add flight</a>
+            <a href="#" onclick="openMenu(event, 'view-ticket-tab')"><img src="update.svg" class="sidebar-icon" alt="">Update flight</a>
+            <a href="#" style="display: <%=display_hide%>" onclick="openMenu(event, 'operator-tab')" class="sidebar-a"><img src="add.svg" class="sidebar-icon" alt=""> Add Operator</a>
+            <a href="#" style="display: <%=display_hide%>" onclick="openMenu(event, 'view-operator-tab')"><img src="update.svg" class="sidebar-icon" alt="">Update Operator</a>
             <a href="logout.jsp"><img src="logout.svg" class="sidebar-icon" alt="">logout</a>
 
         </div>
@@ -118,6 +120,7 @@
                         </table>
                     </div>
                     <input type="number" name="catrows" id="totalrows" hidden>
+                    <input type="text" name="action" value="addflight" hidden>
                     <button type="button" class="admin-btn" onclick="add()">+</button>
                     <button type="button" class="admin-btn" onclick="remove()">-</button><br>
                     <button type="submit" class="admin-btn">submit</button>
@@ -130,9 +133,9 @@
             <!-- view tickets,ticket table ,search tickets -->
 
             <div class="admin-tab" id="view-ticket-tab" style="display: none;">
-                <h2>View Match</h2>
+                <h2>View Flights</h2>
                 <div class="filter">
-
+                    <a href="Dashboard.jsp"></a>
                 </div>
                 <table>
                     <thead>
@@ -148,8 +151,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <%
-                            int i = 0;
+                        <%                            int i = 0;
                             for (Flight flightinstance : flightlist) {
                                 i++;//this will provide the position of the object to update
                         %>
@@ -162,7 +164,7 @@
                             <td><%=dateformat.format(flightinstance.getDepartureDate())%></td>
                             <td><%=timeformat.format(flightinstance.getDepartureTime())%></td>
                             <td>
-                                <a href="UpdateTicket.jsp?flightid=<%=flightinstance.getId()%>"><button>Edit</button></a>
+                                <a href="UpdateFlight.jsp?flightid=<%=flightinstance.getId()%>"><button>Edit</button></a>
                             </td>
                         </tr>
                         <%}%>
@@ -177,11 +179,11 @@
                     <div class="inputs">
                         <div class="inputbox">
                             <label for="">First name <span>*</span></label>
-                            <input type="text" name="firstname">
+                            <input type="text" name="firstname" required>
                         </div>
                         <div class="inputbox">
                             <label for="">last name <span>*</span></label>
-                            <input type="text" name="lastname">
+                            <input type="text" name="lastname" required>
                         </div>
                         <div class="inputbox">
                             <label for="">gender</label>
@@ -192,31 +194,56 @@
                             </select>
                         </div>
                         <div class="inputbox">
+                            <label for="">Date Of Birth</label>
+                            <input type="date" name="dateofbirth" required>
+                        </div>
+                        <div class="inputbox">
+                            <label for="">Identification Type</label>
+                            <select name="identificationtype">
+                                <option value="NATIONAL_ID">NATIONAL_ID</option>
+                                <option value="PASSPORT">PASSPORT</option>
+                            </select>
+                        </div>
+                        <div class="inputbox">
+                            <label for="">ID Number</label>
+                            <input type="text" name="idnumber" required>
+                        </div>
+                        <div class="inputbox">
+                            <label for="">Nationality</label>
+                            <input type="text" name="nationality" required>
+                        </div>
+                        <div class="inputbox">
                             <label for="">Email <span>*</span></label>
-                            <input type="text" name="email">
+                            <input type="text" name="email" required>
                         </div>
                         <div class="inputbox">
                             <label for="">Phone number <span>*</span></label>
-                            <input type="text" name="phonenumber">
+                            <input type="text" name="phonenumber" required>
+                        </div>
+                        <div class="inputbox">
+                            <label for="">Country <span>*</span></label>
+                            <input type="text" name="country" required>
                         </div>
                         <div class="inputbox">
                             <label for="">City <span>*</span></label>
-                            <input type="text" name="city">
+                            <input type="text" name="city" required>
                         </div>
                         <div class="inputbox">
-                            <label for="">Address <span>*</span></label>
-                            <input type="text" name="address">
+                            <label for="">Street Address <span>*</span></label>
+                            <input type="text" name="street" required>
                         </div>
-                        <div class="inputbox">
-                        </div>
-                        <h2></h2>
-
+                        
                     </div>
+
+
+                    <h2></h2>
+
+
                     <h2 style="text-align: center">Account Details</h2>
                     <div class="inputs">
                         <div class="inputbox">
                             <label for="">User name <span>*</span></label>
-                            <input type="text" name="username">
+                            <input type="text" name="username" required>
                         </div>
                         <div class="inputbox">
                             <label for="">Post <span>*</span></label>
@@ -228,7 +255,7 @@
                         </div>
                         <div class="inputbox">
                             <label for="">Account Status <span>*</span></label>
-                            <select name="post">
+                            <select name="status">
                                 <c:forEach items="${statuslist}" var="status">
                                     <option value="${status}">${status}</option>
                                 </c:forEach>
@@ -236,15 +263,16 @@
                         </div>
                         <div class="inputbox">
                             <label for="">password <span>*</span></label>
-                            <input type="password" name="password">
+                            <input type="password" name="password" required>
                         </div>
 
                     </div>
+                    <input type="text" name="action" hidden value="addoperator">
                     <button type="submit" class="admin-btn">submit</button>
                 </form>
             </div>
             <div class="admin-tab" id="view-operator-tab" style="display: none;">
-                <h2>View Match</h2>
+                <h2>View Operators</h2>
                 <div class="filter">
 
                 </div>
@@ -264,13 +292,15 @@
                     <tbody>
                         <%
                             for (Operator operatorInstance : operatorlist) {
+
+
                         %>
                         <tr>
                             <td><%=operatorInstance.getFirstname()%></td>
                             <td><%=operatorInstance.getLastname()%></td>
-                            <td><%=operatorInstance.getCity()%></td>
-                            <td><%=operatorInstance.getEmail()%></td>
-                            <td><%=operatorInstance.getPhonenumber()%></td>
+                            <td><%=operatorInstance.getDateOfBirth()%></td>
+                            <td><%=operatorInstance.getNationality()%></td>
+                            <td><%=operatorInstance.getAddress().getEmail()%></td>
                             <td><%=dateformat.format(operatorInstance.getCreatedon())%></td>
                             <td><%=operatorInstance.getCreatedon()%></td>
                             <td>

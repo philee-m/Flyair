@@ -77,9 +77,31 @@ public class TicketControl extends HttpServlet {
 
             response.sendRedirect("Homepage.jsp");
         } catch (Exception e) {
-            System.out.println("Error is: "+e.getCause());
-            System.out.println("Error is: "+e.getMessage());
+            System.out.println("Error is: " + e.getCause());
+            System.out.println("Error is: " + e.getMessage());
+
+        }
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String action = request.getParameter("action");
+
+        switch (action) {
             
+            case "getPassengerTickets":
+                String 
+                break;
+            
+            case "getAllTickets":
+                
+                break;
+            
+            default:
+                
+                break;
         }
 
     }

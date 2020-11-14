@@ -19,14 +19,10 @@ import Domain.Gender;
 import Domain.Operator;
 import Domain.Post;
 import java.io.IOException;
-import java.security.NoSuchAlgorithmException;
-import java.security.NoSuchProviderException;
 import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -51,7 +47,7 @@ public class UpdateControl extends HttpServlet {
             throws ServletException, IOException {
         GenericDao generic = new GenericDao();
         OperatorDao operatorDao = new OperatorDao();
-        String action =  request.getParameter("actione");
+        String action =  request.getParameter("action");
         System.out.println("action is : "+action);
         switch (action) {
             case "updateflight":
@@ -60,7 +56,7 @@ public class UpdateControl extends HttpServlet {
                 System.out.println("the id is :"+flightid);
 
                 Flight flight = (Flight) generic.findBYId(new Flight(), flightid);
-                List<FlightCategory> categorylist = CategoryDao.getInstance().SearchByFlightId(flightid);
+//                List<FlightCategory> categorylist = CategoryDao.getInstance().SearchByFlightId(flightid);
 
                 request.getSession().removeAttribute("flightid");
                 flight.setAirline(request.getParameter("airline"));
@@ -93,27 +89,7 @@ public class UpdateControl extends HttpServlet {
                 break;
 
             case "updateoperator":
-                System.out.println("in update operator");
-                Long operatoride = (Long) request.getSession().getAttribute("operatorid");
-                Operator operator = (Operator) generic.findBYId(new Operator(), operatoride);
-                Account account = (Account) AccountDao.getInstance().SearchByOperatorId(operatoride);
                 
-
-                operator.setFirstname(request.getParameter("firstname"));
-                operator.setLastname(request.getParameter("lastname"));
-                operator.setEmail(request.getParameter("email"));
-                operator.setPhonenumber(request.getParameter("phonenumber"));
-                operator.setGender(Gender.valueOf(request.getParameter("gender")));
-                operator.setCity(request.getParameter("city"));
-                operator.setAddress(request.getParameter("address"));
-
-                account.setOperator(operator);
-                account.setUsername(request.getParameter("username"));
-                account.setAccountStatus(AccountStatus.valueOf(request.getParameter("statusvalue")));
-                account.setPost(Post.valueOf(request.getParameter("post")));
-
-                OperatorDao.getInstance().updateOperator(operator, account);
-                response.sendRedirect("Dashboard.jsp");
                 break;
             default:
                 System.out.println("no action specified");

@@ -19,13 +19,7 @@ import org.hibernate.SessionFactory;
 public class CategoryDao {
     SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
-    public static CategoryDao categoryDao = null;
-    public static synchronized CategoryDao getInstance(){
-        if(categoryDao==null){
-            categoryDao=new CategoryDao();
-        }
-        return categoryDao;
-    }
+    
     
     public FlightCategory SearchSingleByFlightId(Long a, String b){
         session=sf.openSession();

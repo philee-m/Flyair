@@ -33,6 +33,9 @@
                             <li class="nav-item" role="presentation"><a class="nav-link" href="Local-Content.html">About Us</a></li>
                             <li class="nav-item" role="presentation"><a class="nav-link" href="International-content.html">Contact Us</a></li>
                         </ul>
+                        <ul class="nav navbar-nav mx-auto">
+                            <li class="nav-item" role="presentation"><a class="nav-link active" href="index.html">My Tickets</a></li>
+                        </ul>
                     </div>
                 </div>
             </nav>
@@ -56,7 +59,7 @@
                             <label for="">Departure Date</label>
                             <input type="date" name="departureDate">
                         </div>
-                        
+
                         <div class="inputbox">
                             <label for="">Class</label>
                             <select name="class">

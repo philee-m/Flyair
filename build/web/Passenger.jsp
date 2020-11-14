@@ -61,6 +61,14 @@
                         <input type="date" name="dateofbirth" required>
                     </div>
                     <div class="inputbox">
+                        <label for="">gender</label>
+                        <select name="gender">
+                            <c:forEach items="${genderlist}" var="gender">
+                                <option value="${gender}">${gender}</option>
+                            </c:forEach>
+                        </select>
+                    </div>
+                    <div class="inputbox">
                         <label for="">Identification Type</label>
                         <select name="identificationtype">
                             <option value="NATIONAL_ID">NATIONAL_ID</option>
@@ -91,7 +99,7 @@
                         <input type="text" name="city" required>
                     </div>
                     <div class="inputbox">
-                        <label for="">Address</label>
+                        <label for="">street</label>
                         <input type="text" name="address" required>
                     </div>
                     <div class="inputbox">
@@ -100,8 +108,20 @@
                     </div>
 
                 </div>
+                <h3>Account Details</h3>
+                <p>This will help you in case you want to view your tickets or cancel tickets.</p>
+                <div class="inputs">
+                    <div class="inputbox">
+                        <label for="">Username</label>
+                        <input type="username" name="username" required>
+                    </div>
+                    <div class="inputbox">
+                        <label for="">Password</label>
+                        <input type="password" name="password" required>
+                    </div>
+                </div>
                 <input type="number" name="id" hidden value="<%=id%>">
-                <button type="submit" class="admin-btn">submit</button>
+                <button type="submit" class="admin-btn">Buy Ticket</button>
             </form>
 
         </div>

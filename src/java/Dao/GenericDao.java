@@ -16,13 +16,7 @@ import org.hibernate.SessionFactory;
 public class GenericDao {
     SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
-    public static GenericDao genericDao = null;
-    public static synchronized GenericDao getInstance(){
-        if(genericDao==null){
-            genericDao=new GenericDao();
-        }
-        return genericDao;
-    }
+    
     public String create(Object o){
         session = sf.openSession();
         session.beginTransaction();

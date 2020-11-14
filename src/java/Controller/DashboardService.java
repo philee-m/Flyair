@@ -9,6 +9,7 @@ import Domain.AccountStatus;
 import Domain.Category;
 import Domain.FlightBookingStatus;
 import Domain.Gender;
+import Domain.IdentificationType;
 import Domain.Post;
 
 /**
@@ -22,6 +23,7 @@ public class DashboardService {
   private Category [] categorylist = Category.values();
   private FlightBookingStatus [] flightstatuslist = FlightBookingStatus.values();
   private AccountStatus [] accountstatuslist = AccountStatus.values();
+  private IdentificationType [] identificationType = IdentificationType.values();
 
     public Gender[] getGenderList() {
         return genderList;
@@ -61,6 +63,14 @@ public class DashboardService {
 
     public void setAccountstatuslist(AccountStatus[] accountstatuslist) {
         this.accountstatuslist = accountstatuslist;
+    }
+
+    public IdentificationType[] getIdentificationType() {
+        return identificationType;
+    }
+
+    public void setIdentificationType(IdentificationType[] identificationType) {
+        this.identificationType = identificationType;
     }
     
     

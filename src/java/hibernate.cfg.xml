@@ -53,10 +53,9 @@ Contributor(s):
     <mapping class="Domain.FlightCategory"/>
     <mapping class="Domain.Operator"/>
     <mapping class="Domain.Passenger"/>
-    <mapping class="Domain.Account"/>
-    <mapping class="Domain.Contact"/>
     <mapping class="Domain.Payment"/>
-    <mapping class="Domain.Person"/>
     <mapping class="Domain.Ticket"/>
+    <mapping class="Domain.ClientAccount"/>
+    <mapping class="Domain.OperatorAccount"/>
   </session-factory>
 </hibernate-configuration>

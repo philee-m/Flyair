@@ -7,6 +7,7 @@ package Dao;
 
 import Domain.Account;
 import Domain.Operator;
+import Domain.OperatorAccount;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -18,15 +19,8 @@ import org.hibernate.SessionFactory;
 public class OperatorDao {
     SessionFactory sf=HibernateUtil.getSessionFactory(); 
     Session session=null;
-    public static OperatorDao operatorDao = null;
-    public static synchronized OperatorDao getInstance(){
-        if(operatorDao==null){
-            operatorDao=new OperatorDao();
-        }
-        return operatorDao;
-    }
     
-    public String createOperator(Operator o, Account a ){
+    public String createOperator(Operator o, OperatorAccount a ){
         session = sf.openSession();
         session.beginTransaction();
         session.save(o);
@@ -35,7 +29,7 @@ public class OperatorDao {
         session.close();
         return "success";
     }
-    public String updateOperator(Operator o, Account a ){
+    public String updateOperator(Operator o, OperatorAccount a ){
         session = sf.openSession();
         session.beginTransaction();
         session.update(o);
@@ -47,7 +41,7 @@ public class OperatorDao {
     
     public Account checkAccount(String username){
         session = sf.openSession();
-        String sql = "FROM Account WHERE username = '"+username+"'";
+        String sql = "FROM OperatorAccount WHERE username = '"+username+"'";
         Query q = session.createQuery(sql);
         Account acc  =(Account) q.uniqueResult();
         session.close();

@@ -9,6 +9,6 @@ package Domain;
  *
  * @author Philip
  */
-public enum Post {
-    OPERATOR, ADMIN, PASSENGER;
+public enum TicketStatus {
+    VALID, INVALID;
 }

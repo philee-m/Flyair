@@ -7,6 +7,8 @@ package Domain;
 
 import java.sql.Timestamp;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -34,6 +36,9 @@ public class Ticket {
     private double price;
     
     private Timestamp boughton;
+    
+    @Enumerated(EnumType.STRING)
+    private TicketStatus ticketStatus;
 
     public long getId() {
         return id;
@@ -74,9 +79,20 @@ public class Ticket {
     public void setBoughton(Timestamp boughton) {
         this.boughton = boughton;
     }
+
+    public TicketStatus getTicketStatus() {
+        return ticketStatus;
+    }
+
+    public void setTicketStatus(TicketStatus ticketStatus) {
+        this.ticketStatus = ticketStatus;
+    }  
     
-    
-    
-    
-    
+    public static Ticket ticket;
+    public static synchronized Ticket getInstance(){
+        if(ticket==null){
+            ticket=new Ticket();
+        }
+        return ticket;
+    }
 }
